@@ -1,5 +1,6 @@
 #include "main.h"
 #include "common.h"
+#include <mysql.h>
 
 
 int cgiMain(){
@@ -9,7 +10,8 @@ int cgiMain(){
   showHeader();
 
   printf("%s\n",getGameName() );
-  // fprintf(stdout, "%s", name);
+
+
 
   showFooter();
 
