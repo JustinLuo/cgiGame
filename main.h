@@ -9,5 +9,7 @@
 #include "./lua/install/include/luaconf.h"
 
 #define lua_open() luaL_newstate()
+#define false 0
+#define true 1
 
 #endif
