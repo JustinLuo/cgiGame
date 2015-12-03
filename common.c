@@ -22,20 +22,20 @@ void luaInit(lua_State *L, const char *fname){
 // 初始化mysql
 MYSQL *mysqlInit(){
   lua_State *L = lua_open();
-  const char *host, *username, *password, *database;
+  const char *username, *password, *database;
   luaInit(L, "database.lua");
-  lua_getglobal(L, "host");
+  // lua_getglobal(L, "host");
   lua_getglobal(L, "username");
   lua_getglobal(L, "password");
   lua_getglobal(L, "database");
-  host = lua_tostring(L, -4);
+  // host = lua_tostring(L, -4);
   username = lua_tostring(L, -3);
   password = lua_tostring(L, -2);
   database = lua_tostring(L, -1);
-  fprintf(cgiOut, "%s\n%s\n%s\n%s\n",host, username, password, database );
+
   lua_close(L);
 
-  #define UN username
+  // #define HOST host
 
   MYSQL *conn_ptr;
   conn_ptr = mysql_init(NULL);
@@ -44,7 +44,7 @@ MYSQL *mysqlInit(){
     // return;
   }
   // fprintf(cgiOut, "Helln" );
-  conn_ptr = mysql_real_connect(conn_ptr, host, username, password, database, 0, NULL, 0);
+  conn_ptr = mysql_real_connect(conn_ptr, "localhost", username, password, database, 0, NULL, 0);
   if (conn_ptr)
     fprintf(cgiOut, "OK" );
   else
