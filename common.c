@@ -81,7 +81,6 @@ char * getGameName(MYSQL *conn_ptr){
   #define SELECT_QUERY_NAME "select `value` from `game_system` where `name` = 'money'"
   MYSQL_ROW row;
   MYSQL_RES *res;
-  // MYSQL *conn_ptr;
   char *title = (char *)malloc(200 * sizeof(char));
 
   // conn_ptr = mysqlInit();
@@ -102,6 +101,32 @@ char * getGameName(MYSQL *conn_ptr){
   return title;
 }
 
+// 获取游戏设置
+char * getGameConfig(MYSQL *conn_ptr, char *name){
+
+  #define SELECT_QUERY "select `value` from `game_system` where `name` = '%s'"
+  MYSQL_ROW row;
+  MYSQL_RES *res;
+  char *title = (char *)malloc(200 * sizeof(char));
+  char query[200] = {};
+
+  sprintf(query, SELECT_QUERY, name);
+  // printf("%s\n", query);
+
+  if (mysql_query(conn_ptr,query)){
+    fprintf(cgiOut, "Query Error%s\n", conn_ptr);
+  }
+  // //
+  res = mysql_use_result(conn_ptr);
+  while ((row = mysql_fetch_row(res)) != NULL){
+    strncpy(title, row[0], strlen(row[0]-1));
+  }
+  // // // printf("%s\n",title );
+  mysql_free_result(res);
+  // // // mysql_close(conn_ptr);
+  return title;
+  // return query;
+}
 
 
 // 获取游戏公告
@@ -137,7 +162,7 @@ void showHeader(MYSQL *conn_ptr){
   cgiHeaderContentType("text/html");
   fprintf(cgiOut, "<!DOCTYPE html>\n<html lang='en'>\n<head>\n");
   fprintf(cgiOut, "<meta charset='utf-8'>\n" );
-  // fprintf(cgiOut, "<title>%s</title>\n",getGameName(conn_ptr) );
+  fprintf(cgiOut, "<title>%s</title>\n",getGameConfig(conn_ptr, "title") );
   fprintf(cgiOut, "</head>\n<body>\n" );
 }
 
