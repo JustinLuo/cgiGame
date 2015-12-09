@@ -1,4 +1,4 @@
-host = "localhost"
-username = "root"
-password = 123456
-database = 'game'
+ServerIp = 'localhost'
+Username = "root"
+Password = 123456
+Database = 'game'

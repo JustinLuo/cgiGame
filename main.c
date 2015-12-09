@@ -9,23 +9,37 @@ int cgiMain(){
 
   showHeader();
 
-  printf("%s<br />",getGameName() );
-  printf("%s\n",getGameNotice() );
+  // printf("%s<br />",getGameName() );
 
-  // MYSQL *conn_ptr;
-  // conn_ptr = mysql_init(NULL);
+  // printf("%s\n",getGameNotice() );
+
+  MYSQL *conn_ptr;
+  conn_ptr =  mysqlInit();
   //
-  // if (!conn_ptr){
-  //   fprintf(cgiOut, "ERROR");
+  // // fprintf(cgiOut, "%s\n", getGameName(conn_ptr));
+  // sprintf(qbuf, "select `value` from `game_system` where `name` = 'title'");
+  // fprintf(cgiOut, "%s<br />", qbuf);
+  //
+  // if (mysql_query(conn_ptr, qbuf)){
+  //   fprintf(cgiOut, "%s\n", mysql_error(conn_ptr));
   // }
-  // conn_ptr = mysql_real_connect(conn_ptr, "localhost", "root", "123456", "game", 0, NULL, 0);
-  // if (conn_ptr)
-  //   fprintf(cgiOut, "Conn OK!" );
-  // else
-  //   fprintf(cgiOut, "Conn error!" );
-  MYSQL *Conn = mysqlInit();
-  mysql_close(Conn);
+  //
+  // res = mysql_use_result(conn_ptr);
+  //
+  // fprintf(cgiOut, "Mysql Tables in mysql databases:<br />" );
+  // while ((row = mysql_fetch_row(res)) != NULL)
+  //   printf("%s<br />", row[0]);
+  //
+  // mysql_free_result(res);
+  //
+  //
+  // mysql_close(conn_ptr);
+  // printf("%s",getGameName(conn_ptr));
 
+  printf("%s\n",getGameNotice(conn_ptr) );
+  // getGameName();
+  // getGameNotice();
+  mysql_close(conn_ptr);
 
 
   showFooter();

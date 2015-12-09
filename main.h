@@ -3,6 +3,7 @@
 
 #include <cgic.h>
 #include <stdlib.h>
+// #include <string.h>
 #include "./lua/install/include/lua.h"
 #include "./lua/install/include/lauxlib.h"
 #include "./lua/install/include/lualib.h"
